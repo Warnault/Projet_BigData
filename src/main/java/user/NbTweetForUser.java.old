@@ -14,9 +14,10 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import type.Tweet;
 import data.convertNljsonToJson.ConvertMapper;
 
-public class TopCountry {
+public class NbTweetForUser {
 
-  public class TopCountryCombiner extends Reducer(Null\,Tweet,Text,IntWritable){
+  public class NbTweetForUserCombiner extends Reducer(NullWritable,Tweet,Text,IntWritable){
+    
     public void reduce(NullWritable key, Iterable<Tweet> values, Context context) throws IOException, InterruptedException{
       for( Tweet t : value)
       context.write( new Text(t.getCountry()), IntWritable(1) );

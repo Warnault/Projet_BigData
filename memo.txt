@@ -1,0 +1,42 @@
+Debut tp : 
+
+source /espace/Auber_PLE-203/user-env.sh 
+
+
+
+Compiler maven : 
+
+mvn compile -> genere le fichier target
+
+
+Compiler et executer un programe : 
+
+- mvn package -> genere l'exécuatble
+- yarn jar target/tp3-mapreduce-0.0.1.jar [argv]
+
+
+tree pour maven : 
+
+pom.xml
+target
+src/main/java/
+
+
+
+Commande HDFS
+
+hdfs dfs -rm -r -f resultat
+hdfs dfs -cat resultat/part-r-00000 
+hdfs dfs -ls /user/ldauriac/
+
+yarn jar target/tp3-mapreduce-0.0.1.jar /user/raw_data/worldcitiespop.txt resultat 
+
+
+
+Compiler la correction 4: 
+
+yarn jar target/tp3-mapreduce-0.0.1.jar worldpop resume /user/raw_data/worldcitiespop.txt resultat 1
+
+
+
+

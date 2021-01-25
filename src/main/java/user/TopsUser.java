@@ -8,7 +8,7 @@ public class TopsUser {
 		ProgramDriver pgd = new ProgramDriver();
 		int exitCode = -1;
 		try {
-			//pgd.addClass("nb_tweets", NbTweetForUser.class, "nb tweet for user");
+			pgd.addClass("cpt_tweet", NbTweetForUser.class, "");
 			pgd.addClass("l", TopLanguage.class, "");
 			pgd.addClass("c", TopCountry.class, "");
 			exitCode = pgd.run(args);

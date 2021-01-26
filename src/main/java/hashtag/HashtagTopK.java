@@ -73,8 +73,7 @@ public class HashtagTopK extends Configured {
 
       String[] s = value.toString().split("\\s+");
       topk.put(Integer.valueOf(s[1]),s[0]);   
-      //int k = context.getConfiguration().getInt("k",8);
-      int k = 10;
+      int k = context.getConfiguration().getInt("k",10);
       while (topk.size() > k)
         topk.remove(topk.firstKey());
     }
@@ -93,8 +92,7 @@ public class HashtagTopK extends Configured {
   public static class HashtagTopKCombiner extends Reducer<NullWritable, Hashtag, NullWritable, Hashtag> {
     @Override
     protected void reduce(NullWritable key, Iterable<Hashtag> values,  Reducer<NullWritable, Hashtag, NullWritable, Hashtag>.Context context) throws IOException, InterruptedException {
-      //int k = context.getConfiguration().getInt("k",8);
-      int k=10;
+      int k = context.getConfiguration().getInt("k",10);
       TreeMap<Integer,String> topk = new TreeMap<Integer,String>();
       for(Hashtag h : values) {
         topk.put(h.freq,h.hashtag_name);
@@ -113,8 +111,7 @@ public class HashtagTopK extends Configured {
     protected void reduce(NullWritable key, Iterable<Hashtag> values, Reducer<NullWritable, Hashtag, Text, IntWritable>.Context context) throws IOException, InterruptedException {
       
       TreeMap<Integer,String> topk = new TreeMap<Integer,String>();
-      //int k = context.getConfiguration().getInt("k",8);
-      int k=10;
+      int k = context.getConfiguration().getInt("k",10);
       for(Hashtag h : values) {
         topk.put( h.freq,h.hashtag_name);
         while(topk.size() > k)

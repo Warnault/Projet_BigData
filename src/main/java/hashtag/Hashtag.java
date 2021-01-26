@@ -10,8 +10,8 @@ public class Hashtag {
 		try {
 			pgd.addClass("l", ListHashtag.class, ""); 
 			pgd.addClass("topk", HashtagTopK.class, "");
-			//pgd.addClass(("topk_freq", HashtagTopKFreq.class, "");
-			//pgd.addClass("u", ListUserUseHashtag.class, "");
+			pgd.addClass("topk_freq", HashtagTopK.class, "");
+			pgd.addClass("u", ListUserUseHashtag.class, "");
 			exitCode = pgd.run(args);
 		} catch (Throwable e1)  {
 			e1.printStackTrace();

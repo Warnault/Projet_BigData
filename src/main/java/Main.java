@@ -6,8 +6,8 @@ public class Main {
 		ProgramDriver pgd = new ProgramDriver();
 		int exitCode = -1;
 		try {
-			pgd.addClass("topsUser",  user.TopsUser.class, "");
-			pgd.addClass("Hashtag",  hashtag.Hashtag.class, "c'est d'la merde");
+			pgd.addClass("User",  user.User.class, "search in User");
+			pgd.addClass("Hashtag",  hashtag.Hashtag.class, "search in Hashtag");
 			exitCode = pgd.run(args);
 		} catch (Throwable e1)  {
 			e1.printStackTrace();

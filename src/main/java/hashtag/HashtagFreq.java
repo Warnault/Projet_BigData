@@ -1,4 +1,4 @@
-package user;
+package hashtag;
 
 import java.io.IOException;
 
@@ -21,68 +21,67 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class ListHashtagForAUser {
 
-  public static class ListHashtagForAUserMapper extends Mapper<Object,Text,Text,IntWritable> {
+public class HashtagFreq {
+
+  public static class HashtagFreqMapper extends Mapper<Object, Text, Text, IntWritable>{
     @Override
-    public void map(Object key, Text value, Context context) throws IOException,InterruptedException {
+    public void map(Object key, Text value, Context context )throws IOException,InterruptedException {
       JsonNode json = new ObjectMapper().readTree(value.toString());
-      if( json.has("delete") ) return;     
-      if(json.hasNonNull("user")){
-        String _screen_name = context.getConfiguration().get("screen_name");
-        String screen_name = json.get("user").get("screen_name").asText();
-        if(screen_name.equals(_screen_name)){
-          ArrayList<String> hastag = new ArrayList<>( json.get("entities").get("hashtags").findValuesAsText("text"));
-          for( String h : hastag )
-            context.write(new Text(h), new IntWritable(1));   
-        }
+      if( json.has("delete")) return;
+      if (json.hasNonNull("user")){
+        String _hashtag = context.getConfiguration().get("hashtag");
+        ArrayList<String> hashtag = new ArrayList<>( json.get("entities").get("hashtags").findValuesAsText("text") );
+        for( String h : hashtag )
+          if( h.equals(_hashtag) )
+            context.write(new Text (h), new IntWritable(1));   
       }
     }
   }
 
-  public static class ListHashtagForAUserCombiner extends Reducer<Text,IntWritable,Text,IntWritable>{
+  public static class HashtagFreqCombiner extends Reducer<Text,IntWritable,Text,IntWritable>{
     public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
       int sum = 0;
       for( IntWritable v : values){
-        sum += v.get();
+        sum ++;
       }
       context.write( key, new IntWritable(sum) );
     }
   } 
-  
-  public static class ListHashtagForAUserReducer extends Reducer<Text,IntWritable,Text,IntWritable>{
+
+  public static class HashtagFreqReducer extends Reducer<Text,IntWritable,Text,IntWritable>{
     public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException,InterruptedException {
       int sum = 0;
       for( IntWritable v : values)
-        sum += v.get();
+        sum +=v.get();
       context.write( key, new IntWritable(sum) );
     }
   }
-     
+
+      
   public static void main(String[] args) throws Exception {
 
     Configuration conf = new Configuration();
-    String screen_name = args[0];
-    conf.set("screen_name",screen_name);
+    String _hashtag = args[0];
+    conf.set("hashtag", _hashtag);
 
     Job job = Job.getInstance(conf, "Main");
 		job.setNumReduceTasks(1);
-		job.setJarByClass(ListHashtagForAUser.class);
+		job.setJarByClass(HashtagFreq.class);
 
 		job.setInputFormatClass(TextInputFormat.class);
 		TextInputFormat.addInputPath(job, new Path(args[1]));
 
 		//Mapper
-    job.setMapperClass(ListHashtagForAUserMapper.class);
+    job.setMapperClass(HashtagFreqMapper.class);
     job.setMapOutputKeyClass(Text.class);
     job.setMapOutputValueClass(IntWritable.class);
 
     //Combiner
-		job.setCombinerClass(ListHashtagForAUserCombiner.class);
-
+		job.setCombinerClass(HashtagFreqCombiner.class);
 
 		//Reducer
-		job.setReducerClass(ListHashtagForAUserReducer.class);
+		job.setReducerClass(HashtagFreqReducer.class);
     job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
 

@@ -8,9 +8,10 @@ public class TopsUser {
 		ProgramDriver pgd = new ProgramDriver();
 		int exitCode = -1;
 		try {
-			pgd.addClass("cpt_tweet", NbTweetForUser.class, "");
-			pgd.addClass("l", TopLanguage.class, "");
-			pgd.addClass("c", TopCountry.class, "");
+			pgd.addClass("cpt_tweet", NbTweetForUser.class, ""); // nb tweet for a user
+			pgd.addClass("l", TopLanguage.class, "");  // list language
+			pgd.addClass("c", TopCountry.class, ""); // list country
+			pgd.addClass("h", ListHashtagForAUser.class,""); // list hastag for a user
 			exitCode = pgd.run(args);
 		} catch (Throwable e1)  {
 			e1.printStackTrace();

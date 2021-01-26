@@ -1,13 +1,17 @@
+package hashtag;
+
 import org.apache.hadoop.util.ProgramDriver;
 
-public class Main {
-	
+public class Hashtag {
+
 	public static void main( String[] args ) throws Exception {
 		ProgramDriver pgd = new ProgramDriver();
 		int exitCode = -1;
 		try {
-			pgd.addClass("topsUser",  user.TopsUser.class, "");
-			pgd.addClass("Hashtag",  hashtag.Hashtag.class, "c'est d'la merde");
+			pgd.addClass("l", ListHashtag.class, ""); 
+			pgd.addClass("topk", HashtagTopK.class, "");
+			//pgd.addClass(("topk_freq", HashtagTopKFreq.class, "");
+			//pgd.addClass("u", ListUserUseHashtag.class, "");
 			exitCode = pgd.run(args);
 		} catch (Throwable e1)  {
 			e1.printStackTrace();

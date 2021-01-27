@@ -1,14 +1,14 @@
 # Projet_BigData
 
 
-#### . Le projet doit s'exécuter sur le cluster de salle 204. Afin de configurer votre espace de travail correctement il faut lancer la commande :
+#### . Le projet doit s'exécuter sur le cluster de salle 203. Afin de configurer votre espace de travail correctement il faut lancer la commande :
   - ``` source /espace/Auber_PLE-203/user-env.sh ```
  
 #### . Pour exécuter le code dans un premier temps, il faut générer les .class, pour cela vous devez compiler avec maven : 
   -  ``` mvn compile ; mvn package ```
  
 #### . Pour exécuter un MapReduce il faut lancer la commande :
-  -```hdfs dfs -rm -r -f hdfs://data:9000/user/<votre_espace_de_travaille_sur_le_cluster>/resultat ; yarn jar target/ple-twitter-project-0.0.1.jar <ARG_1> <ARG_2> <PARAMS> /raw_data/tweet_01_03_2020_first10000.nljson resultat ```
+  -```hdfs dfs -rm -r -f hdfs://data:9000/user/<votre_espace_de_travaille_sur_le_cluster>/resultat ; yarn jar target/ple-twitter-project-0.0.1.jar <ARG_1> <ARG_2> <PARAMS> <fichier_de_data.nljson> <dossier_pour_save_le_resultat> ```
   
 attention ARG2 depent de ARG1.
 

@@ -1,4 +1,11 @@
-/autofs/unityaccount/cremi/warnault/Master/S9/programmation_large_echelle/Projet_BigData/src/main/java/user/TopsUser.java
+/autofs/unityaccount/cremi/warnault/Master/S9/programmation_large_echelle/Projet_BigData/src/main/java/user/ListHashtagForAUser.java
+/autofs/unityaccount/cremi/warnault/Master/S9/programmation_large_echelle/Projet_BigData/src/main/java/hashtag/ListHashtag.java
+/autofs/unityaccount/cremi/warnault/Master/S9/programmation_large_echelle/Projet_BigData/src/main/java/hashtag/HashtagTopK.java
 /autofs/unityaccount/cremi/warnault/Master/S9/programmation_large_echelle/Projet_BigData/src/main/java/user/TopCountry.java
 /autofs/unityaccount/cremi/warnault/Master/S9/programmation_large_echelle/Projet_BigData/src/main/java/Main.java
+/autofs/unityaccount/cremi/warnault/Master/S9/programmation_large_echelle/Projet_BigData/src/main/java/hashtag/ListUserUseHashtag.java
+/autofs/unityaccount/cremi/warnault/Master/S9/programmation_large_echelle/Projet_BigData/src/main/java/hashtag/Hashtag.java
+/autofs/unityaccount/cremi/warnault/Master/S9/programmation_large_echelle/Projet_BigData/src/main/java/hashtag/HashtagFreq.java
+/autofs/unityaccount/cremi/warnault/Master/S9/programmation_large_echelle/Projet_BigData/src/main/java/user/NbTweetForUser.java
+/autofs/unityaccount/cremi/warnault/Master/S9/programmation_large_echelle/Projet_BigData/src/main/java/user/User.java
 /autofs/unityaccount/cremi/warnault/Master/S9/programmation_large_echelle/Projet_BigData/src/main/java/user/TopLanguage.java

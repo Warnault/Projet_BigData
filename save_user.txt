@@ -1,0 +1,66 @@
+a) Permettre de récupérer pour un jours donné la liste des k
+hashtags les plus utilisés ainsi que leur nombre d’apparition (k
+entre 1 et 10000).
+b) Permettre de récupérer les k hashtags les plus utilisés (k entre
+1 et 10000) sur toutes les données.
+c) Permettre de récupérer le nombre d’apparition d’un hashtag donné.
+d) Récupérer tous les utilisateurs qui ont utilisé un hashtag
+
+
+  //First Job - Counts, how many times a word encountered in a given file
+  
+   JobConf job1 = new JobConf(WordCount.class); 
+   job1.setJobName("WordCount"); 
+   job1.setOutputKeyClass(Text.class);
+   job1.setOutputValueClass(IntWritable.class); 
+   job1.setMapperClass(WordCountMapper.class); 
+   job1.setCombinerClass(WordCountReducer.class);
+   job1.setReducerClass(WordCountReducer.class); 
+   job1.setInputFormat(TextInputFormat.class); 
+   job1.setOutputFormat(TextOutputFormat.class); 
+   
+   //Ensure that a folder with the "input_data" exists on HDFS and contains the input files 
+   FileInputFormat.setInputPaths(job1, new Path("input_data")); 
+   
+   //"first_job_output" contains data that how many times a word occurred in the given file 
+   //This will be the input to the second job. For second job, input data name should be 
+   //"first_job_output". 
+   
+   FileOutputFormat.setOutputPath(job1, new Path("first_job_output")); 
+   JobClient.runJob(job1); 
+   
+   //Second Job - Counts total number of words in a given file 
+   
+   JobConf job2 = new JobConf(TotalWords.class); 
+   job2.setJobName("TotalWords");
+   job2.setOutputKeyClass(Text.class);
+   job2.setOutputValueClass(IntWritable.class); 
+   job2.setMapperClass(TotalWordsMapper.class); 
+   job2.setCombinerClass(TotalWordsReducer.class); 
+   job2.setReducerClass(TotalWordsReducer.class); 
+   job2.setInputFormat(TextInputFormat.class); 
+   job2.setOutputFormat(TextOutputFormat.class); 
+   
+   //Path name for this job should match first job's output path name 
+   
+   FileInputFormat.setInputPaths(job2, new Path("first_job_output")); 
+   
+   //This will contain the final output. If you want to send this jobs output 
+   //as input to third job, then third jobs input path name should be "second_job_output" 
+   //In this way, jobs can be chained, sending output one to other as input and get the 
+   //final output 
+   
+   FileOutputFormat.setOutputPath(job2, new Path("second_job_output")); 
+   JobClient.runJob(job2); 
+
+
+enacional       6
+scstate_rys20   7
+Master  8
+BestMusicVideo  9
+방탄소년단      11
+RedeBBB 13
+BTS     14
+iHeartAwards    15
+bbb20   27
+BBB20   41

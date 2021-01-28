@@ -24,7 +24,7 @@ public class TopCountry {
     public void map(Object key,Text value,Context context) throws IOException,InterruptedException {
       JsonNode json = new ObjectMapper().readTree(value.toString());
       if(json.has("delete")) return;
-      if (json.hasNonNull("place")) {
+      if (json.hasNonNull("place")){
         String country = json.get("place").get("country").asText();
         context.write(new Text(country), new IntWritable(1));
       }
@@ -34,10 +34,9 @@ public class TopCountry {
   public static class TopCountryCombiner extends Reducer<Text,IntWritable,Text,IntWritable>{
     public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
       int sum = 0;
-      for( IntWritable v : values){
+      for( IntWritable v : values)
         sum += v.get();
-        context.write( key, new IntWritable(sum) );
-      }
+      context.write( key, new IntWritable(sum) );
     }
   }
      
